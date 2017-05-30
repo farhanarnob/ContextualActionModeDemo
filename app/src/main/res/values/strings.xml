@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">Contextual Action Mode</string>
+
+    <string-array name="name">
+        <item>Sunny</item>
+        <item>Imran</item>
+        <item>Barid</item>
+        <item>Purba</item>
+        <item>Arnob</item>
+        <item>Sajib</item>
+        <item>Malik</item>
+        <item>Anirudha</item>
+    </string-array>
+
+    <string-array name="email">
+        <item>a@aiub.edu</item>
+        <item>b@aiub.edu</item>
+        <item>c@aiub.edu</item>
+        <item>d@aiub.edu</item>
+        <item>e@aiub.edu</item>
+        <item>f@aiub.edu</item>
+        <item>g@aiub.edu</item>
+        <item>h@aiub.edu</item>
+    </string-array>
+
+</resources>
