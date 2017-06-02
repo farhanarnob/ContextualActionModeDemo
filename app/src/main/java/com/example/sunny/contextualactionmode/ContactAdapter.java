@@ -1,6 +1,5 @@
 package com.example.sunny.contextualactionmode;
 
-import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,62 +8,55 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Sunny on 5/31/2017.
+ * modified by farhanarnob on 06/02/2017.
  */
 
 public class ContactAdapter extends RecyclerView.Adapter <ContactAdapter.ContactViewHolder> {
+    private List<Contact> mContactList;
 
-    ArrayList<Contact> adaplist = new ArrayList<>();
-    MainActivity mainActivity;
-    Context context;
+    public ContactAdapter(List<Contact> contactList){
+        mContactList = contactList;
+    }
 
-    public ContactAdapter(ArrayList<Contact> adaplist, Context context) {
-        this.adaplist = adaplist;
-        this.context = context;
-        mainActivity = (MainActivity) context;
+
+
+    @Override
+    public ContactAdapter.ContactViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_layout,null);
+        return new ContactViewHolder(view);
     }
 
     @Override
-    public ContactViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_layout,parent,false);
-        ContactViewHolder contactViewHolder = new ContactViewHolder(view,mainActivity);
-        return contactViewHolder;
-    }
-
-    @Override
-    public void onBindViewHolder(ContactViewHolder holder, int position) {
-        holder.img.setImageResource(adaplist.get(position).getImage_id());
-        holder.Name.setText(adaplist.get(position).getName());
-        holder.Email.setText(adaplist.get(position).getEmail());
+    public void onBindViewHolder(ContactAdapter.ContactViewHolder holder, int position) {
+        Contact contact = mContactList.get(position);
+        holder.textView_name.setText(contact.getName());
+        holder.textView_email.setText(contact.getEmail());
     }
 
     @Override
     public int getItemCount() {
-        return adaplist.size();
+        if(mContactList != null){
+            return mContactList.size();
+        }
+        return 0;
     }
 
+    public class ContactViewHolder extends RecyclerView.ViewHolder{
+        private ImageView imageView_imageId;
+        private TextView textView_name;
+        private TextView textView_email;
+        private CheckBox checkBox_checkList;
 
-    public static class ContactViewHolder extends RecyclerView.ViewHolder{
-
-        ImageView img;
-        TextView Name,Email;
-        CheckBox checkBox;
-        MainActivity mainActivity;
-
-        public ContactViewHolder(View itemView, MainActivity mainActivity) {
+        private ContactViewHolder(View itemView) {
             super(itemView);
-
-            img = (ImageView) itemView.findViewById(R.id.image_id);
-            Name = (TextView) itemView.findViewById(R.id.name);
-            Email = (TextView) itemView.findViewById(R.id.email);
-            checkBox = (CheckBox) itemView.findViewById(R.id.checklist);
-            this.mainActivity = mainActivity;
+            imageView_imageId = (ImageView) itemView.findViewById(R.id.image_id);
+            textView_name = (TextView) itemView.findViewById(R.id.name);
+            textView_email = (TextView) itemView.findViewById(R.id.email);
+            checkBox_checkList = (CheckBox) itemView.findViewById(R.id.checklist);
         }
     }
-
-
-
 }
